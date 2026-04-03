@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryu Group | Laboratory for Interfacial Science and Catalysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --primary-color: #0f172a; /* Deep Navy */
+            --accent-color: #f59e0b;  /* SNU Gold/Yellow accent */
+            --text-main: #334155;
+            --text-light: #f8fafc;
+            --bg-light: #ffffff;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            z-index: 1000;
+            background: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* SNU Logo Style */
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            background: url('https://upload.wikimedia.org/wikipedia/en/0/03/Seoul_National_University_logo.svg') no-repeat center;
+            background-size: contain;
+            background-color: white;
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-light);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        /* Hero Section - Downscaled for No-Scroll */
+        .hero {
+            height: 50vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--text-light);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Contact Section - Compact */
+        .contact-section {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: var(--bg-light);
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        /* Footer - Compact */
+        footer {
+            background-color: #000000;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.95);
+            }
+            .logo { color: var(--primary-color); margin-bottom: 15px;}
+            .logo-img { filter: invert(1); }
+            nav ul li a { color: var(--text-main); font-size: 0.9rem;}
+            .hero h1 { font-size: 2rem; padding: 0 20px; }
+            .marker-container { top: 40%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-img"></div>
+            Ryu Group
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">J. Ryu</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Publications</a></li>
+                <li><a href="#">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <h1>Laboratory for Interfacial Science and Catalysis</h1>
+    </main>
+
+    <section class="contact-section">
+        <p>We welcome inquiries and applications from<br>interested students and researchers.</p>
+        <div class="contact-email">
+            Please contact <strong>Jaeyune Ryu</strong> via email (<a href="mailto:jaeyune.ryu@snu.ac.kr">jaeyune.ryu@snu.ac.kr</a>).
+        </div>
+    </section>
+
+    <footer>
+        <p>1 Gwanak-ro, Gwanak-gu, 302-708, Seoul 08826, Republic of Korea</p>
+        <p>E-mail: jaeyune.ryu@snu.ac.kr &nbsp;|&nbsp; Phone: +82-2-880-1883</p>
+        <p class="copyright">&copy; 2023 by Ryu Group at SNU, All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Change navbar style on scroll for a modern feel
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
