@@ -28,6 +28,10 @@
             color: var(--text-main);
             background-color: var(--bg-light);
             line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         a {
@@ -37,12 +41,12 @@
 
         /* Header & Navigation */
         header {
-            position: relative;
+            flex-shrink: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            padding: 10px 40px;
             z-index: 1000;
             background: var(--primary-color);
             border-bottom: 2px solid var(--accent-color);
@@ -82,28 +86,31 @@
             transition: var(--transition);
         }
 
-        /* Hero Section - Downscaled for No-Scroll */
+        /* Hero Section - Maximized for No-Scroll */
         .hero {
-            height: 50vh;
+            flex: 1; /* Take up all available space */
             background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            min-height: 300px;
         }
 
         .hero h1 {
             color: var(--text-light);
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            padding: 0 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
         }
 
         /* Contact Section - Compact */
         .contact-section {
-            padding: 30px 20px;
+            flex-shrink: 0;
+            padding: 20px;
             text-align: center;
             background-color: var(--bg-light);
         }
@@ -111,16 +118,17 @@
         .contact-section p {
             font-size: 1.1rem;
             color: var(--text-main);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         /* Footer - Compact */
         footer {
+            flex-shrink: 0;
             background-color: #000000;
             color: #94a3b8;
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
+            padding: 10px;
+            font-size: 0.75rem;
         }
 
         footer p {
