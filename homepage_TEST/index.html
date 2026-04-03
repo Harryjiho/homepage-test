@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryu Group | Laboratory for Interfacial Science and Catalysis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Theme */
+        /* CSS Variables */
         :root {
-            --primary-color: #0f172a; /* Deep Navy */
-            --accent-color: #f59e0b;  /* SNU Gold/Yellow accent */
-            --text-main: #334155;
-            --text-light: #f8fafc;
-            --bg-light: #ffffff;
+            --primary-color: #ffffff; /* Main White Base */
+            --header-bg: #f1f5f9;     /* 아주 살짝 회색 (헤더 음영) */
+            --border-color: #cbd5e1;  /* 경계선 색상 (세련된 슬레이트 톤) */
+            --footer-bg: #f8fafc;     /* 아주 연한 회색 (푸터) */
+            --accent-color: #549bf7;  /* SNU Blue/Accent */
+            --text-main: #334155;     /* Dark gray for main text */
+            --text-dark: #0f172a;     /* Deep dark/black for headers */
+            --text-light: #64748b;    /* Subtext gray */
             --transition: all 0.3s ease-in-out;
         }
 
@@ -26,12 +29,12 @@
 
         body {
             color: var(--text-main);
-            background-color: var(--bg-light);
+            background-color: var(--primary-color);
             line-height: 1.6;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Prevent scrolling */
+            overflow-y: scroll;
         }
 
         a {
@@ -41,145 +44,270 @@
 
         /* Header & Navigation */
         header {
-            flex-shrink: 0;
+            position: sticky;
+            top: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 40px;
+            padding: 15px 50px;
             z-index: 1000;
-            background: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.3rem;
+            gap: 15px;
+            font-size: 2.0rem;
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--text-dark);
+            transition: var(--transition);
         }
 
-        /* SNU Logo Style */
-        .logo-img {
-            width: 35px;
-            height: 35px;
-            background: url('https://upload.wikimedia.org/wikipedia/en/0/03/Seoul_National_University_logo.svg') no-repeat center;
-            background-size: contain;
-            background-color: white;
-            border-radius: 50%;
-            padding: 2px;
+        .logo img {
+            width: 45px; /* 👈 이 숫자를 늘리거나 줄여서 로고 크기를 조절하세요 */
+            height: auto; /* 비율 찌그러짐 방지 */
+            filter: brightness(0); /* (선택) 배경이 밝을 때 하얀색 로고를 검은색으로 반전시키는 효과 */
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
 
         nav ul li a {
-            font-size: 0.95rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-light);
+            color: var(--text-main);
             position: relative;
             transition: var(--transition);
+            cursor: pointer;
         }
 
-        /* Hero Section - Maximized for No-Scroll */
-        .hero {
-            flex: 1; /* Take up all available space */
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* ---------------------------------
+           View Containers (SPA Logic)
+        --------------------------------- */
+        .view-section {
+            flex: 1; 
             display: flex;
             flex-direction: column;
-            justify-content: center;
+        }
+
+        /* Hero Section (Home View) */
+        .hero {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
             align-items: center;
             text-align: center;
-            min-height: 300px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+                              url('background img.png');
+            background-size: cover;      
+            background-position: center; 
+            background-repeat: no-repeat;
         }
 
         .hero h1 {
-            color: var(--text-light);
-            font-size: 2.8rem;
+            color: var(--text-dark);
+            font-size: 3.2em; 
             font-weight: 700;
-            margin-bottom: 10px;
-            padding: 0 20px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+            letter-spacing: -1px; 
+            animation: fadeInDown 1s ease-out;
+            display: block;
+            width: 95%;            
+            max-width: 1400px;      
+            margin: 0 auto;         
+            white-space: normal;    
+            word-break: keep-all;   
+            line-height: 1.1;
         }
 
-        /* Contact Section - Compact */
+        /* Contact Section (Home View) */
         .contact-section {
-            flex-shrink: 0;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
-            background-color: var(--bg-light);
+            background-color: var(--primary-color);
         }
 
         .contact-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-main);
-            margin-bottom: 5px;
+            max-width: 800px;
+            margin: 0 auto 10px auto;
+            font-weight: 300;
         }
 
-        /* Footer - Compact */
+        .contact-email {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-email strong, .contact-email a {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .contact-email a {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: var(--transition);
+        }
+
+        .contact-email a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ---------------------------------
+           PI Section (CV Style)
+        --------------------------------- */
+        .pi-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        .pi-photo {
+            width: 200px;  /* 👈 이 숫자를 키우거나 줄여서 사이즈를 조절합니다 */
+            height: auto;  /* 비율을 유지하기 위해 auto로 두는 권장합니다 */
+            border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(95, 84, 84, 0.1); 
+            object-fit: cover; 
+}
+
+        .cv-title {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .cv-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .cv-title p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .cv-block {
+            margin-bottom: 40px;
+        }
+
+        /* 형광펜 파란색 밑줄 효과 완전 제거됨 */
+        .cv-block h3 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .cv-item {
+            display: flex;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        /* 연도 표기가 절대 줄바꿈되지 않도록 수정 */
+        .cv-date {
+            flex: 0 0 160px; /* 길어진 연도를 위해 공간 확보 */
+            font-weight: 600;
+            color: var(--accent-color);
+            padding-right: 20px;
+            white-space: nowrap; /* 자동 줄바꿈 방지 */
+        }
+
+        .cv-desc {
+            flex: 1;
+            color: var(--text-main);
+        }
+
+        .cv-desc strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        .cv-desc .sub-text {
+            color: var(--text-light);
+            font-size: 0.95em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* Footer */
         footer {
-            flex-shrink: 0;
-            background-color: #000000;
-            color: #94a3b8;
+            background-color: var(--footer-bg);
+            color: var(--text-main);
             text-align: center;
-            padding: 10px;
-            font-size: 0.75rem;
+            padding: 20px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto; 
         }
 
-        footer p {
-            margin-bottom: 10px;
-        }
+        footer p { margin-bottom: 5px; }
+        footer .copyright { margin-top: 10px; font-size: 0.8rem; color: var(--text-light); }
 
-        footer .copyright {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #64748b;
-        }
-
-        /* Animations */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-                background: rgba(255, 255, 255, 0.95);
-            }
-            .logo { color: var(--primary-color); margin-bottom: 15px;}
-            .logo-img { filter: invert(1); }
-            nav ul li a { color: var(--text-main); font-size: 0.9rem;}
-            .hero h1 { font-size: 2rem; padding: 0 20px; }
-            .marker-container { top: 40%; }
+            header { flex-direction: column; padding: 15px; }
+            .logo { margin-bottom: 15px; }
+            .hero h1 { font-size: 2rem; }
+            
+            /* 모바일 환경에서는 타임라인을 상하 배치로 변경하여 화면 잘림 방지 */
+            .cv-item { flex-direction: column; margin-bottom: 20px; }
+            .cv-date { flex: none; margin-bottom: 5px; }
         }
+        
     </style>
 </head>
 <body>
 
     <header id="navbar">
-        <a href="#" class="logo">
-            <div class="logo-img"></div>
+        <a href="#" class="logo" id="nav-logo">
+            <img src="SNU logo.png" alt="SNU Logo">
             Ryu Group
         </a>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a id="nav-home" class="active">Home</a></li>
                 <li><a href="#">Research</a></li>
-                <li><a href="#">J. Ryu</a></li>
+                <li><a id="nav-pi">PI</a></li>
                 <li><a href="#">Team</a></li>
                 <li><a href="#">Publications</a></li>
                 <li><a href="#">News</a></li>
@@ -187,16 +315,110 @@
         </nav>
     </header>
 
-    <main class="hero">
-        <h1>Laboratory for Interfacial Science and Catalysis</h1>
-    </main>
+    <div id="view-home" class="view-section">
+        <main class="hero">
+            <h1>Laboratory for Interfacial Science and Catalysis</h1>
+        </main>
 
-    <section class="contact-section">
-        <p>We welcome inquiries and applications from<br>interested students and researchers.</p>
-        <div class="contact-email">
-            Please contact <strong>Jaeyune Ryu</strong> via email (<a href="mailto:jaeyune.ryu@snu.ac.kr">jaeyune.ryu@snu.ac.kr</a>).
+        <section class="contact-section">
+            <p>We welcome inquiries and applications from<br>interested students and researchers.</p>
+            <div class="contact-email">
+                Please contact <strong>Jaeyune Ryu</strong> via email (<a href="mailto:jaeyune.ryu@snu.ac.kr">jaeyune.ryu@snu.ac.kr</a>).
+            </div>
+        </section>
+    </div>
+
+    <div id="view-pi" class="view-section" style="display: none;">
+        <div class="pi-container">
+            
+            <div class="cv-title">
+                <h2>Prof. Jaeyune Ryu</h2>
+                <p>Principal Investigator</p>
+            </div>
+
+            <div class="pi-photo-container">
+                <img src="prof img.jpg" alt="Prof. Jaeyune Ryu" class="pi-photo">
+            </div>
+
+            <div class="cv-block">
+                <h3>Appointment</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2023.3-present</div>
+                    <div class="cv-desc"><strong>Assistant Professor</strong>, School of Chemical and Biological Engineering, <strong>SNU</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2021.9-2023.1</div>
+                    <div class="cv-desc">
+                        <strong>Postdoctoral Fellow</strong>, Department of Chemistry and Chemical Biology, <strong>Harvard Univ.</strong>
+                        <span class="sub-text">(Host: Professor Daniel G. Nocera)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2013.3-2016.8</div>
+                    <div class="cv-desc"><strong>Staff Research Scientist</strong>, Fuel Cell Research Center, <strong>KIST</strong></div>
+                </div>
+            </div>
+
+            <div class="cv-block">
+                <h3>Education</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2016.9-2021.6</div>
+                    <div class="cv-desc">
+                        <strong>Ph.D.</strong>, Department of Chemistry, <strong>MIT</strong>
+                        <span class="sub-text">(Advisor: Professor Yogesh Surendranath)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011.2-2013.2</div>
+                    <div class="cv-desc">
+                        <strong>M.S.</strong>, Department of Chemistry, <strong>KAIST</strong>
+                        <span class="sub-text">(Advisor: Professor Sukbok Chang)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2007.2-2011.2</div>
+                    <div class="cv-desc"><strong>B.S.</strong>, Department of Chemistry, <strong>KAIST</strong></div>
+                </div>
+            </div>
+
+            <div class="cv-block">
+                <h3>Honors and Awards</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2024</div>
+                    <div class="cv-desc">College of Engineering Excellence in Teaching Award, <strong>SNU</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2023</div>
+                    <div class="cv-desc">POSCO Science Fellow, <strong>POSCO</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2021</div>
+                    <div class="cv-desc">Davison Prize for the Best Thesis, <strong>MIT</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2019</div>
+                    <div class="cv-desc">IPMI Student Award, <strong>IPMI</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2016-2021</div>
+                    <div class="cv-desc">Samsung PhD Scholarship, <strong>Samsung Foundation</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011</div>
+                    <div class="cv-desc">Shim Hong-Ku Award, <strong>KAIST</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011</div>
+                    <div class="cv-desc">Minister (Science and Technology) Award to the Valedictorian</div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2007</div>
+                    <div class="cv-desc">Presidential Award, <strong>KAIST</strong></div>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
 
     <footer>
         <p>1 Gwanak-ro, Gwanak-gu, 302-708, Seoul 08826, Republic of Korea</p>
@@ -205,15 +427,44 @@
     </footer>
 
     <script>
-        // Change navbar style on scroll for a modern feel
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+        // DOM 요소 가져오기
+        const navHome = document.getElementById('nav-home');
+        const navPi = document.getElementById('nav-pi');
+        const navLogo = document.getElementById('nav-logo');
+        
+        const viewHome = document.getElementById('view-home');
+        const viewPi = document.getElementById('view-pi');
+
+        // Home 화면 보기 함수
+        function showHome(e) {
+            if(e) e.preventDefault();
+            viewHome.style.display = 'flex';
+            viewPi.style.display = 'none';
+            
+            navHome.classList.add('active');
+            navPi.classList.remove('active');
+            
+            // 화면 최상단으로 부드럽게 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // PI 화면 보기 함수
+        function showPi(e) {
+            if(e) e.preventDefault();
+            viewHome.style.display = 'none';
+            viewPi.style.display = 'flex';
+            
+            navHome.classList.remove('active');
+            navPi.classList.add('active');
+            
+            // 화면 최상단으로 부드럽게 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 클릭 이벤트 리스너 등록
+        navHome.addEventListener('click', showHome);
+        navLogo.addEventListener('click', showHome); // 로고 클릭시에도 Home으로 이동
+        navPi.addEventListener('click', showPi);
     </script>
 </body>
 </html>
