@@ -355,6 +355,86 @@
             font-weight: 550;
         }
 
+        /* ---------------------------------
+           Team Section
+        --------------------------------- */
+        /* 포스닥, 대학원생 등 그룹을 나누는 큰 제목 */
+        .team-category {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 50px;
+            font-weight: 700;
+        }
+        .team-category:first-of-type {
+            margin-top: 0;
+        }
+
+        /* 팀원 한 명의 영역 (사진과 글을 가로로 배치) */
+        .team-member {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* 왼쪽 사진 영역: 가로 크기 200px 고정, 1:1 비율 정사각형 */
+        .team-photo-wrapper {
+            flex: 0 0 200px; 
+        }
+        .team-photo-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 오른쪽 정보 영역 */
+        .team-info {
+            flex: 1;
+            padding-top: 10px;
+        }
+
+        /* 이름: 가장 크고 굵게 */
+        .team-name {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        /* 학력 리스트 */
+        .team-education {
+            margin-bottom: 15px;
+        }
+        .team-education p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        /* 학위(B.S., M.S.) 글씨만 굵게 만드는 특수 이름표 */
+        .degree-bold {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* 관련 연구: 글씨는 작게, 무조건 한 줄로 나오게, 넘치면 '...' 처리 */
+        .team-research {
+            font-size: 0.9rem; 
+            color: var(--text-light); 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+        .team-research strong {
+            color: var(--text-main);
+        }
+
         /* Footer */
         footer {
             background-color: var(--footer-bg);
@@ -394,7 +474,13 @@
                 flex: none; /* 고정 너비 해제 */
                 width: 100%; /* 모바일에서는 사진이 꽉 차게 */
             }
+
+            /* Team 모바일 대응 */
+            .team-member { flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+            .team-photo-wrapper { flex: none; width: 180px; }
+            .team-research { white-space: normal; } /* 모바일에서는 줄바꿈 허용 */
         }
+        
         
     </style>
 </head>
@@ -640,6 +726,301 @@
         </div>
     </div>
 
+    <div id="view-team" class="view-section" style="display: none;">
+            <div class="page-container">
+                
+                <div class="section-title">
+                    <h2>Team</h2>
+                    <p>Meet our researchers</p>
+                </div>
+
+                <h3 class="team-category">Postdoctoral Researchers</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="team_member1.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hong Gil-dong</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">Ph.D.</span> in Chemical Engineering, Seoul National University (2024)</p>
+                            <p><span class="degree-bold">M.S.</span> in Chemistry, KAIST (2020)</p>
+                            <p><span class="degree-bold">B.S.</span> in Chemistry, KAIST (2018)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <h3 class="team-category">Ph.D Students</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hyunjoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hyunjun Cho</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">M.S.</span> Dept of Chemistry, Dongguk University (2024)</p>
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemistry, Dongguk University (2022)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sunghyun.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sunghyun Min</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hyungseok.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hyungseok Oh</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sangwoo.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sangwoo Ahn</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Macro Electrochemistry, Electrocatalysis for Energy Conversion, Electrochemical Synthesis
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sangwon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sangwon Choi</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="junghoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Junghoon Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                
+                 <h3 class="team-category">M.S Stdudents</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="dooyoung.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Duyeong Kim</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biomolecular Engineering, Yonsei University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="jiho.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Jiho Hwang</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical Engineering, SungKyunKwan University (2022)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, Self Driving Laboratory
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="changyeop.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Changyeop Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Dongguk University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Macro Electrochemistry, Electrocatalysis for Energy Conversion, Electrochemical Synthesis
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="seungheon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Seungheon Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="jiwoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Jiwoon Suh</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="yoonseo.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Yoonseo Cho</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="woojin.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Woojin Jung</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hanju.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hanju Kim</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2026)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Seiras Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <h3 class="team-category">Undergraduate Students</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="seohan.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Seohan Ji</h4>
+                        
+                        <div class="team-education">
+                            <p>Dept of Chemical and Biological Engineering, Seoul National University</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                </div>
+        </div>
+
     <div id="view-news" class="view-section" style="display: none;">
         <div class="page-container">
             
@@ -691,7 +1072,7 @@
 
     <script>
         // 관리할 페이지들의 아이디(ID) 이름 목록
-        const pages = ['home', 'research', 'pi', 'news'];
+        const pages = ['home', 'research', 'pi', 'team', 'news'];
 
         // 통합된 페이지 이동 함수 (이 함수 하나로 모든 메뉴 이동을 제어합니다)
         function switchPage(targetPage, e) {
@@ -724,6 +1105,7 @@
         document.getElementById('nav-home').addEventListener('click', (e) => switchPage('home', e));
         document.getElementById('nav-research').addEventListener('click', (e) => switchPage('research', e));
         document.getElementById('nav-pi').addEventListener('click', (e) => switchPage('pi', e));
+        document.getElementById('nav-team').addEventListener('click', (e) => switchPage('team', e));
         document.getElementById('nav-news').addEventListener('click', (e) => switchPage('news', e));
 
         // Note: Team, Publications 등 아직 안 만든 페이지는 나중에 동일한 방식으로 연결해주면 됩니다!
