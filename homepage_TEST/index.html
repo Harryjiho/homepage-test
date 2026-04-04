@@ -8,14 +8,14 @@
     <style>
         /* CSS Variables */
         :root {
-            --primary-color: #ffffff; /* Main White Base */
-            --header-bg: #f1f5f9;     /* 아주 살짝 회색 (헤더 음영) */
-            --border-color: #cbd5e1;  /* 경계선 색상 (세련된 슬레이트 톤) */
-            --footer-bg: #f8fafc;     /* 아주 연한 회색 (푸터) */
-            --accent-color: #549bf7;  /* SNU Blue/Accent */
-            --text-main: #334155;     /* Dark gray for main text */
-            --text-dark: #0f172a;     /* Deep dark/black for headers */
-            --text-light: #64748b;    /* Subtext gray */
+            --primary-color: #ffffff;
+            --header-bg: #f1f5f9;
+            --border-color: #cbd5e1;
+            --footer-bg: #f8fafc;
+            --accent-color: #549bf7;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
             --transition: all 0.3s ease-in-out;
         }
 
@@ -65,12 +65,13 @@
             font-weight: 700;
             color: var(--text-dark);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .logo img {
-            width: 45px; /* 👈 이 숫자를 늘리거나 줄여서 로고 크기를 조절하세요 */
-            height: auto; /* 비율 찌그러짐 방지 */
-            filter: brightness(0); /* (선택) 배경이 밝을 때 하얀색 로고를 검은색으로 반전시키는 효과 */
+            width: 45px;
+            height: auto;
+            filter: brightness(0);
         }
 
         nav ul {
@@ -115,7 +116,36 @@
             flex-direction: column;
         }
 
-        /* Hero Section (Home View) */
+        /* 공통 페이지 컨테이너 (PI, Research, News 모두 사용) */
+        .page-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* ---------------------------------
+           Home Section
+        --------------------------------- */
         .hero {
             flex: 1; 
             display: flex;
@@ -146,7 +176,6 @@
             line-height: 1.1;
         }
 
-        /* Contact Section (Home View) */
         .contact-section {
             padding: 30px 20px;
             text-align: center;
@@ -186,45 +215,17 @@
         /* ---------------------------------
            PI Section (CV Style)
         --------------------------------- */
-        .pi-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
         .pi-photo {
             margin-bottom: 30px;
-            width: 270px;  /* 👈 이 숫자를 키우거나 줄여서 사이즈를 조절합니다 */
-            height: auto;  /* 비율을 유지하기 위해 auto로 두는 권장합니다 */
+            width: 270px;
+            height: auto;
             border-radius: 8px; 
             box-shadow: 0 4px 12px rgba(95, 84, 84, 0.1); 
             object-fit: cover; 
-}
-
-        .cv-title {
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
         }
 
-        .cv-title h2 {
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            font-weight: 800;
-        }
-
-        .cv-title p {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            font-weight: 600;
-            margin-top: 5px;
-        }
-
-        .cv-block {
-            margin-bottom: 40px;
-        }
-
-        /* 형광펜 파란색 밑줄 효과 완전 제거됨 */
+        .cv-block { margin-bottom: 40px; }
+        
         .cv-block h3 {
             font-size: 1.4rem;
             color: var(--text-dark);
@@ -239,13 +240,12 @@
             line-height: 1.5;
         }
 
-        /* 연도 표기가 절대 줄바꿈되지 않도록 수정 */
         .cv-date {
-            flex: 0 0 160px; /* 길어진 연도를 위해 공간 확보 */
+            flex: 0 0 160px;
             font-weight: 600;
             color: var(--accent-color);
             padding-right: 20px;
-            white-space: nowrap; /* 자동 줄바꿈 방지 */
+            white-space: nowrap;
         }
 
         .cv-desc {
@@ -263,6 +263,96 @@
             font-size: 0.95em;
             display: block;
             margin-top: 3px;
+        }
+
+        /* ---------------------------------
+           Research Area Section
+        --------------------------------- */
+        .research-block {
+            margin-bottom: 60px;
+        }
+
+        .research-block h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+      .research-content {
+            display: flex;
+            align-items: flex-start; /* 이미지가 위로 기준을 맞추도록 정렬 */
+            gap: 60px; /* 글과 사진 사이의 간격 */
+        }
+
+        /* 👈 새로 추가된 부분: 글 영역 */
+        .research-text {
+            flex: 1; /* 남는 왼쪽 공간을 글이 전부 차지하도록 함 */
+        }
+
+        .research-text p {
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .research-text_Paper p {
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-size: 0.7rem;
+        }
+
+        /* 👈 수정된 부분: 오른쪽 이미지 영역 크기 고정 */
+        .research-img-wrapper {
+            flex: 0 0 250px; /* 사진 영역의 가로 너비를 350px로 고정 (원하는 크기로 조절 가능) */
+        }
+
+        .research-img-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ---------------------------------
+           News Section (큰 이미지 + 설명)
+        --------------------------------- */
+        .news-item {
+            margin-bottom: 70px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .news-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .news-image-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .news-desc {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            font-weight: 550;
         }
 
         /* Footer */
@@ -289,10 +379,21 @@
             header { flex-direction: column; padding: 15px; }
             .logo { margin-bottom: 15px; }
             .hero h1 { font-size: 2rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
             
-            /* 모바일 환경에서는 타임라인을 상하 배치로 변경하여 화면 잘림 방지 */
             .cv-item { flex-direction: column; margin-bottom: 20px; }
             .cv-date { flex: none; margin-bottom: 5px; }
+            
+            .news-title { font-size: 1.5rem; }
+            .research-content {
+                flex-direction: column;
+                gap: 15px; /* 세로 간격 */
+            }
+            
+            .research-img-wrapper {
+                flex: none; /* 고정 너비 해제 */
+                width: 100%; /* 모바일에서는 사진이 꽉 차게 */
+            }
         }
         
     </style>
@@ -300,18 +401,18 @@
 <body>
 
     <header id="navbar">
-        <a href="#" class="logo" id="nav-logo">
+        <a id="nav-logo" class="logo">
             <img src="SNU Logo.png" alt="SNU Logo">
             Ryu Group
         </a>
         <nav>
             <ul>
                 <li><a id="nav-home" class="active">Home</a></li>
-                <li><a href="#">Research</a></li>
+                <li><a id="nav-research">Research Area</a></li>
                 <li><a id="nav-pi">PI</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Publications</a></li>
-                <li><a href="#">News</a></li>
+                <li><a id="nav-team">Team</a></li>
+                <li><a id="nav-publications">Publications</a></li>
+                <li><a id="nav-news">News</a></li>
             </ul>
         </nav>
     </header>
@@ -320,7 +421,6 @@
         <main class="hero">
             <h1>Laboratory for Interfacial Science and Catalysis</h1>
         </main>
-
         <section class="contact-section">
             <p>We welcome inquiries and applications from<br>interested students and researchers.</p>
             <div class="contact-email">
@@ -329,10 +429,129 @@
         </section>
     </div>
 
-    <div id="view-pi" class="view-section" style="display: none;">
-        <div class="pi-container">
+    <div id="view-research" class="view-section" style="display: none;">
+        <div class="page-container">
             
-            <div class="cv-title">
+            <div class="section-title">
+                <h2>Research Area</h2>
+                <p>Discover our core research themes</p>
+            </div>
+
+            <div class="research-block">
+                <h3>1. Nano Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            Nanoelectrochemistry is a specialized field of electrochemistry that investigates charge transfer and chemical reactions occurring at the nanometer scale ($10^{-9}\text{m}$). When the dimensions of an electrode or a material decrease to the nanoscale, the surface-area-to-volume ratio increases dramatically, leading to unique electrochemical behaviors that differ significantly from those observed in bulk (macro) systems.
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="research-block">
+                <h3>2. Electrothermo Chemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="research-block">
+                <h3>3. Organic Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>4. Macro Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>5. Photonic Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>6. Self Driving Laboratory(SDLs)</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="sdl.jpg" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+                <div class="research-text_Paper">
+                        <p>
+                            <br>
+                            Self-driving laboratories in Korea: a new era of autonomous discovery | Digital Discovery | 2026
+                        </p>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="view-pi" class="view-section" style="display: none;">
+        <div class="page-container">
+            
+            <div class="section-title">
                 <h2>Prof. Jaeyune Ryu</h2>
                 <p>Principal Investigator</p>
             </div>
@@ -341,7 +560,7 @@
                 <img src="prof img.jpg" alt="Prof. Jaeyune Ryu" class="pi-photo">
             </div>
 
-            <br><div class="cv-block">
+            <div class="cv-block">
                 <h3>Appointment</h3>
                 <div class="cv-item">
                     <div class="cv-date">2023.3-present</div>
@@ -421,6 +640,49 @@
         </div>
     </div>
 
+    <div id="view-news" class="view-section" style="display: none;">
+        <div class="page-container">
+            
+            <div class="section-title">
+                <h2>News</h2>
+                <p>Latest updates from Ryu Group</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2024 - 06</div> <h3 class="news-title"></h3> <div class="news-image-wrapper">
+                    <img src="news_3.jpg" alt="News Image">
+                </div>
+                
+                <p class="news-desc">
+                    Group dinner to celebrate all the success we've had together thus far and for the upcoming summer!
+                </p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2024 - Spring</div> <h3 class="news-title"></h3> <div class="news-image-wrapper">
+                    <img src="news_2.jpg" alt="News Image">
+                </div>
+                
+                <p class="news-desc">
+                    Joyful moments shared by all of us!
+                </p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2023-10</div>
+                <h3 class="news-title"></h3>
+                <div class="news-image-wrapper">
+                    <img src="news_1.jpg" alt="News Image">
+                </div>
+                <p class="news-desc">
+                    Our brand-new lab is now in action! <br>
+                    We kicked things off with a visit from Prof. Roman (MIT)
+                </p>
+            </div>
+
+        </div>
+    </div>
+
     <footer>
         <p>1 Gwanak-ro, Gwanak-gu, 302-708, Seoul 08826, Republic of Korea</p>
         <p>E-mail: jaeyune.ryu@snu.ac.kr &nbsp;|&nbsp; Phone: +82-2-880-1883</p>
@@ -428,44 +690,43 @@
     </footer>
 
     <script>
-        // DOM 요소 가져오기
-        const navHome = document.getElementById('nav-home');
-        const navPi = document.getElementById('nav-pi');
-        const navLogo = document.getElementById('nav-logo');
-        
-        const viewHome = document.getElementById('view-home');
-        const viewPi = document.getElementById('view-pi');
+        // 관리할 페이지들의 아이디(ID) 이름 목록
+        const pages = ['home', 'research', 'pi', 'news'];
 
-        // Home 화면 보기 함수
-        function showHome(e) {
-            if(e) e.preventDefault();
-            viewHome.style.display = 'flex';
-            viewPi.style.display = 'none';
-            
-            navHome.classList.add('active');
-            navPi.classList.remove('active');
-            
-            // 화면 최상단으로 부드럽게 스크롤
+        // 통합된 페이지 이동 함수 (이 함수 하나로 모든 메뉴 이동을 제어합니다)
+        function switchPage(targetPage, e) {
+            if(e) e.preventDefault(); // a 태그의 기본 이동 기능 막기
+
+            pages.forEach(page => {
+                // 1. 화면(View) 숨기기 & 보이기
+                const viewElement = document.getElementById(`view-${page}`);
+                if(viewElement) {
+                    viewElement.style.display = (page === targetPage) ? 'flex' : 'none';
+                }
+
+                // 2. 네비게이션 메뉴(Nav) 밑줄(active) 효과 업데이트
+                const navElement = document.getElementById(`nav-${page}`);
+                if(navElement) {
+                    if(page === targetPage) {
+                        navElement.classList.add('active');
+                    } else {
+                        navElement.classList.remove('active');
+                    }
+                }
+            });
+
+            // 페이지 전환 시 화면을 맨 위로 스크롤
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // PI 화면 보기 함수
-        function showPi(e) {
-            if(e) e.preventDefault();
-            viewHome.style.display = 'none';
-            viewPi.style.display = 'flex';
-            
-            navHome.classList.remove('active');
-            navPi.classList.add('active');
-            
-            // 화면 최상단으로 부드럽게 스크롤
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        // 각 메뉴 버튼을 클릭했을 때 switchPage 함수가 알맞게 실행되도록 연결
+        document.getElementById('nav-logo').addEventListener('click', (e) => switchPage('home', e));
+        document.getElementById('nav-home').addEventListener('click', (e) => switchPage('home', e));
+        document.getElementById('nav-research').addEventListener('click', (e) => switchPage('research', e));
+        document.getElementById('nav-pi').addEventListener('click', (e) => switchPage('pi', e));
+        document.getElementById('nav-news').addEventListener('click', (e) => switchPage('news', e));
 
-        // 클릭 이벤트 리스너 등록
-        navHome.addEventListener('click', showHome);
-        navLogo.addEventListener('click', showHome); // 로고 클릭시에도 Home으로 이동
-        navPi.addEventListener('click', showPi);
+        // Note: Team, Publications 등 아직 안 만든 페이지는 나중에 동일한 방식으로 연결해주면 됩니다!
     </script>
 </body>
 </html>
