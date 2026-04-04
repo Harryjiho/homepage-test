@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryu Group | Laboratory for Interfacial Science and Catalysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #ffffff;
+            --header-bg: #f1f5f9;
+            --border-color: #cbd5e1;
+            --footer-bg: #f8fafc;
+            --accent-color: #549bf7;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text-main);
+            background-color: var(--primary-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            z-index: 1000;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 2.0rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 45px;
+            height: auto;
+            filter: brightness(0);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            position: relative;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* ---------------------------------
+           View Containers (SPA Logic)
+        --------------------------------- */
+        .view-section {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 공통 페이지 컨테이너 (PI, Research, News 모두 사용) */
+        .page-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        /* ---------------------------------
+           Home Section
+        --------------------------------- */
+        .hero {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+                              url('background img.png');
+            background-size: cover;      
+            background-position: center; 
+            background-repeat: no-repeat;
+        }
+
+        .hero h1 {
+            color: var(--text-dark);
+            font-size: 3.2em; 
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+            letter-spacing: -1px; 
+            animation: fadeInDown 1s ease-out;
+            display: block;
+            width: 95%;            
+            max-width: 1400px;      
+            margin: 0 auto;         
+            white-space: normal;    
+            word-break: keep-all;   
+            line-height: 1.1;
+        }
+
+        .contact-section {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: var(--primary-color);
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            max-width: 800px;
+            margin: 0 auto 10px auto;
+            font-weight: 300;
+        }
+
+        .contact-email {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-email strong, .contact-email a {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .contact-email a {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: var(--transition);
+        }
+
+        .contact-email a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ---------------------------------
+           PI Section (CV Style)
+        --------------------------------- */
+        .pi-photo {
+            margin-bottom: 30px;
+            width: 270px;
+            height: auto;
+            border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(95, 84, 84, 0.1); 
+            object-fit: cover; 
+        }
+
+        .cv-block { margin-bottom: 40px; }
+        
+        .cv-block h3 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .cv-item {
+            display: flex;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .cv-date {
+            flex: 0 0 160px;
+            font-weight: 600;
+            color: var(--accent-color);
+            padding-right: 20px;
+            white-space: nowrap;
+        }
+
+        .cv-desc {
+            flex: 1;
+            color: var(--text-main);
+        }
+
+        .cv-desc strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+        
+        .cv-desc .sub-text {
+            color: var(--text-light);
+            font-size: 0.95em;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* ---------------------------------
+           Research Area Section
+        --------------------------------- */
+        .research-block {
+            margin-bottom: 60px;
+        }
+
+        .research-block h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+      .research-content {
+            display: flex;
+            align-items: flex-start; /* 이미지가 위로 기준을 맞추도록 정렬 */
+            gap: 60px; /* 글과 사진 사이의 간격 */
+        }
+
+        /* 👈 새로 추가된 부분: 글 영역 */
+        .research-text {
+            flex: 1; /* 남는 왼쪽 공간을 글이 전부 차지하도록 함 */
+        }
+
+        .research-text p {
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        .research-text_Paper p {
+            color: var(--text-main);
+            margin-bottom: 25px;
+            font-size: 0.7rem;
+        }
+
+        /* 👈 수정된 부분: 오른쪽 이미지 영역 크기 고정 */
+        .research-img-wrapper {
+            flex: 0 0 250px; /* 사진 영역의 가로 너비를 350px로 고정 (원하는 크기로 조절 가능) */
+        }
+
+        .research-img-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ---------------------------------
+           News Section (큰 이미지 + 설명)
+        --------------------------------- */
+        .news-item {
+            margin-bottom: 70px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .news-title {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .news-image-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .news-desc {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            font-weight: 550;
+        }
+
+        /* ---------------------------------
+           Team Section
+        --------------------------------- */
+        /* 포스닥, 대학원생 등 그룹을 나누는 큰 제목 */
+        .team-category {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 50px;
+            font-weight: 700;
+        }
+        .team-category:first-of-type {
+            margin-top: 0;
+        }
+
+        /* 팀원 한 명의 영역 (사진과 글을 가로로 배치) */
+        .team-member {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* 왼쪽 사진 영역: 가로 크기 200px 고정, 1:1 비율 정사각형 */
+        .team-photo-wrapper {
+            flex: 0 0 200px; 
+        }
+        .team-photo-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 오른쪽 정보 영역 */
+        .team-info {
+            flex: 1;
+            padding-top: 10px;
+        }
+
+        /* 이름: 가장 크고 굵게 */
+        .team-name {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        /* 학력 리스트 */
+        .team-education {
+            margin-bottom: 15px;
+        }
+        .team-education p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        /* 학위(B.S., M.S.) 글씨만 굵게 만드는 특수 이름표 */
+        .degree-bold {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* 관련 연구: 글씨는 작게, 무조건 한 줄로 나오게, 넘치면 '...' 처리 */
+        .team-research {
+            font-size: 0.9rem; 
+            color: var(--text-light); 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+        .team-research strong {
+            color: var(--text-main);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--text-main);
+            text-align: center;
+            padding: 20px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto; 
+        }
+
+        footer p { margin-bottom: 5px; }
+        footer .copyright { margin-top: 10px; font-size: 0.8rem; color: var(--text-light); }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            .logo { margin-bottom: 15px; }
+            .hero h1 { font-size: 2rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            
+            .cv-item { flex-direction: column; margin-bottom: 20px; }
+            .cv-date { flex: none; margin-bottom: 5px; }
+            
+            .news-title { font-size: 1.5rem; }
+            .research-content {
+                flex-direction: column;
+                gap: 15px; /* 세로 간격 */
+            }
+            
+            .research-img-wrapper {
+                flex: none; /* 고정 너비 해제 */
+                width: 100%; /* 모바일에서는 사진이 꽉 차게 */
+            }
+
+            /* Team 모바일 대응 */
+            .team-member { flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+            .team-photo-wrapper { flex: none; width: 180px; }
+            .team-research { white-space: normal; } /* 모바일에서는 줄바꿈 허용 */
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <a id="nav-logo" class="logo">
+            <img src="SNU Logo.png" alt="SNU Logo">
+            Ryu Group
+        </a>
+        <nav>
+            <ul>
+                <li><a id="nav-home" class="active">Home</a></li>
+                <li><a id="nav-research">Research Area</a></li>
+                <li><a id="nav-pi">PI</a></li>
+                <li><a id="nav-team">Team</a></li>
+                <li><a id="nav-publications">Publications</a></li>
+                <li><a id="nav-news">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="view-home" class="view-section">
+        <main class="hero">
+            <h1>Laboratory for Interfacial Science and Catalysis</h1>
+        </main>
+        <section class="contact-section">
+            <p>We welcome inquiries and applications from<br>interested students and researchers.</p>
+            <div class="contact-email">
+                Please contact <strong>Jaeyune Ryu</strong> via email (<a href="mailto:jaeyune.ryu@snu.ac.kr">jaeyune.ryu@snu.ac.kr</a>).
+            </div>
+        </section>
+    </div>
+
+    <div id="view-research" class="view-section" style="display: none;">
+        <div class="page-container">
+            
+            <div class="section-title">
+                <h2>Research Area</h2>
+                <p>Discover our core research themes</p>
+            </div>
+
+            <div class="research-block">
+                <h3>1. Nano Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            Nanoelectrochemistry is a specialized field of electrochemistry that investigates charge transfer and chemical reactions occurring at the nanometer scale ($10^{-9}\text{m}$). When the dimensions of an electrode or a material decrease to the nanoscale, the surface-area-to-volume ratio increases dramatically, leading to unique electrochemical behaviors that differ significantly from those observed in bulk (macro) systems.
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="research-block">
+                <h3>2. Electrothermo Chemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="research-block">
+                <h3>3. Organic Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>4. Macro Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>5. Photonic Electrochemistry</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="SNU Logo.png" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+            </div>
+            
+             <div class="research-block">
+                <h3>6. Self Driving Laboratory(SDLs)</h3>
+                <div class="research-content">
+                    
+                    <div class="research-text">
+                        <p>
+                            [여기에 연구 내용에 대한 상세한 설명을 입력하세요...]
+                        </p>
+                    </div>
+
+                    <div class="research-img-wrapper">
+                        <img src="sdl.jpg" alt="Research Image 1"> 
+                    </div>
+
+                </div>
+                <div class="research-text_Paper">
+                        <p>
+                            <br>
+                            Self-driving laboratories in Korea: a new era of autonomous discovery | Digital Discovery | 2026
+                        </p>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="view-pi" class="view-section" style="display: none;">
+        <div class="page-container">
+            
+            <div class="section-title">
+                <h2>Prof. Jaeyune Ryu</h2>
+                <p>Principal Investigator</p>
+            </div>
+
+            <div class="pi-photo-container">
+                <img src="prof img.jpg" alt="Prof. Jaeyune Ryu" class="pi-photo">
+            </div>
+
+            <div class="cv-block">
+                <h3>Appointment</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2023.3-present</div>
+                    <div class="cv-desc"><strong>Assistant Professor</strong>, School of Chemical and Biological Engineering, <strong>SNU</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2021.9-2023.1</div>
+                    <div class="cv-desc">
+                        <strong>Postdoctoral Fellow</strong>, Department of Chemistry and Chemical Biology, <strong>Harvard Univ.</strong>
+                        <span class="sub-text">(Host: Professor Daniel G. Nocera)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2013.3-2016.8</div>
+                    <div class="cv-desc"><strong>Staff Research Scientist</strong>, Fuel Cell Research Center, <strong>KIST</strong></div>
+                </div>
+            </div>
+
+            <div class="cv-block">
+                <h3>Education</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2016.9-2021.6</div>
+                    <div class="cv-desc">
+                        <strong>Ph.D.</strong>, Department of Chemistry, <strong>MIT</strong>
+                        <span class="sub-text">(Advisor: Professor Yogesh Surendranath)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011.2-2013.2</div>
+                    <div class="cv-desc">
+                        <strong>M.S.</strong>, Department of Chemistry, <strong>KAIST</strong>
+                        <span class="sub-text">(Advisor: Professor Sukbok Chang)</span>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2007.2-2011.2</div>
+                    <div class="cv-desc"><strong>B.S.</strong>, Department of Chemistry, <strong>KAIST</strong></div>
+                </div>
+            </div>
+
+            <div class="cv-block">
+                <h3>Honors and Awards</h3>
+                <div class="cv-item">
+                    <div class="cv-date">2024</div>
+                    <div class="cv-desc">College of Engineering Excellence in Teaching Award, <strong>SNU</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2023</div>
+                    <div class="cv-desc">POSCO Science Fellow, <strong>POSCO</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2021</div>
+                    <div class="cv-desc">Davison Prize for the Best Thesis, <strong>MIT</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2019</div>
+                    <div class="cv-desc">IPMI Student Award, <strong>IPMI</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2016-2021</div>
+                    <div class="cv-desc">Samsung PhD Scholarship, <strong>Samsung Foundation</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011</div>
+                    <div class="cv-desc">Shim Hong-Ku Award, <strong>KAIST</strong></div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2011</div>
+                    <div class="cv-desc">Minister (Science and Technology) Award to the Valedictorian</div>
+                </div>
+                <div class="cv-item">
+                    <div class="cv-date">2007</div>
+                    <div class="cv-desc">Presidential Award, <strong>KAIST</strong></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="view-team" class="view-section" style="display: none;">
+            <div class="page-container">
+                
+                <div class="section-title">
+                    <h2>Team</h2>
+                    <p>Meet our researchers</p>
+                </div>
+
+                <h3 class="team-category">Postdoctoral Researchers</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="team_member1.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hong Gil-dong</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">Ph.D.</span> in Chemical Engineering, Seoul National University (2024)</p>
+                            <p><span class="degree-bold">M.S.</span> in Chemistry, KAIST (2020)</p>
+                            <p><span class="degree-bold">B.S.</span> in Chemistry, KAIST (2018)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <h3 class="team-category">Ph.D Students</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hyunjoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hyunjun Cho</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">M.S.</span> Dept of Chemistry, Dongguk University (2024)</p>
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemistry, Dongguk University (2022)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sunghyun.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sunghyun Min</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hyungseok.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hyungseok Oh</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sangwoo.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sangwoo Ahn</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Macro Electrochemistry, Electrocatalysis for Energy Conversion, Electrochemical Synthesis
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="sangwon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Sangwon Choi</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="junghoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Junghoon Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2024)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                
+                 <h3 class="team-category">M.S Stdudents</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="dooyoung.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Duyeong Kim</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biomolecular Engineering, Yonsei University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="jiho.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Jiho Hwang</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical Engineering, SungKyunKwan University (2022)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, Self Driving Laboratory
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="changyeop.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Changyeop Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Dongguk University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Macro Electrochemistry, Electrocatalysis for Energy Conversion, Electrochemical Synthesis
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="seungheon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Seungheon Lee</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="jiwoon.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Jiwoon Suh</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="yoonseo.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Yoonseo Cho</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="woojin.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Woojin Jung</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2025)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="hanju.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Hanju Kim</h4>
+                        
+                        <div class="team-education">
+                            <p><span class="degree-bold">B.S.</span> Dept of Chemical and Biological Engineering, Seoul National University (2026)</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Seiras Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                 <h3 class="team-category">Undergraduate Students</h3>
+
+                <div class="team-member">
+                    <div class="team-photo-wrapper">
+                        <img src="seohan.jpg" alt="Member Name">
+                    </div>
+                    
+                    <div class="team-info">
+                        <h4 class="team-name">Seohan Ji</h4>
+                        
+                        <div class="team-education">
+                            <p>Dept of Chemical and Biological Engineering, Seoul National University</p>
+                        </div>
+                        
+                        <p class="team-research">
+                            <strong>Research Interests:</strong> Nano Electrochemistry, CO2 Reduction, Electrocatalysis for Energy Conversion
+                        </p>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+    <div id="view-news" class="view-section" style="display: none;">
+        <div class="page-container">
+            
+            <div class="section-title">
+                <h2>News</h2>
+                <p>Latest updates from Ryu Group</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2024 - 06</div> <h3 class="news-title"></h3> <div class="news-image-wrapper">
+                    <img src="news_3.jpg" alt="News Image">
+                </div>
+                
+                <p class="news-desc">
+                    Group dinner to celebrate all the success we've had together thus far and for the upcoming summer!
+                </p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2024 - Spring</div> <h3 class="news-title"></h3> <div class="news-image-wrapper">
+                    <img src="news_2.jpg" alt="News Image">
+                </div>
+                
+                <p class="news-desc">
+                    Joyful moments shared by all of us!
+                </p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2023-10</div>
+                <h3 class="news-title"></h3>
+                <div class="news-image-wrapper">
+                    <img src="news_1.jpg" alt="News Image">
+                </div>
+                <p class="news-desc">
+                    Our brand-new lab is now in action! <br>
+                    We kicked things off with a visit from Prof. Roman (MIT)
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>1 Gwanak-ro, Gwanak-gu, 302-708, Seoul 08826, Republic of Korea</p>
+        <p>E-mail: jaeyune.ryu@snu.ac.kr &nbsp;|&nbsp; Phone: +82-2-880-1883</p>
+        <p class="copyright">&copy; 2023 by Ryu Group at SNU, All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 관리할 페이지들의 아이디(ID) 이름 목록
+        const pages = ['home', 'research', 'pi', 'team', 'news'];
+
+        // 통합된 페이지 이동 함수 (이 함수 하나로 모든 메뉴 이동을 제어합니다)
+        function switchPage(targetPage, e) {
+            if(e) e.preventDefault(); // a 태그의 기본 이동 기능 막기
+
+            pages.forEach(page => {
+                // 1. 화면(View) 숨기기 & 보이기
+                const viewElement = document.getElementById(`view-${page}`);
+                if(viewElement) {
+                    viewElement.style.display = (page === targetPage) ? 'flex' : 'none';
+                }
+
+                // 2. 네비게이션 메뉴(Nav) 밑줄(active) 효과 업데이트
+                const navElement = document.getElementById(`nav-${page}`);
+                if(navElement) {
+                    if(page === targetPage) {
+                        navElement.classList.add('active');
+                    } else {
+                        navElement.classList.remove('active');
+                    }
+                }
+            });
+
+            // 페이지 전환 시 화면을 맨 위로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 각 메뉴 버튼을 클릭했을 때 switchPage 함수가 알맞게 실행되도록 연결
+        document.getElementById('nav-logo').addEventListener('click', (e) => switchPage('home', e));
+        document.getElementById('nav-home').addEventListener('click', (e) => switchPage('home', e));
+        document.getElementById('nav-research').addEventListener('click', (e) => switchPage('research', e));
+        document.getElementById('nav-pi').addEventListener('click', (e) => switchPage('pi', e));
+        document.getElementById('nav-team').addEventListener('click', (e) => switchPage('team', e));
+        document.getElementById('nav-news').addEventListener('click', (e) => switchPage('news', e));
+
+        // Note: Team, Publications 등 아직 안 만든 페이지는 나중에 동일한 방식으로 연결해주면 됩니다!
+    </script>
+</body>
+</html>
